@@ -11,6 +11,13 @@ import org.json.JSONObject;
  * This class echoes a string called from JavaScript.
  */
 public class MathCalculator extends CordovaPlugin {
+    private static final String TAG = "mathcalculator";
+
+    @Override
+    public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+        super.initialize(cordova, webView);
+        Log.d(TAG, "Initializing mathcalculator");
+    }
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException
@@ -19,15 +26,23 @@ public class MathCalculator extends CordovaPlugin {
         {
             this.add(args, callbackContext);
             return true;
-        }else if(action.equals("substract"))
-        {
+        }
+        else if(action.equals("substract")) {
             this.substract(args, callbackContext);
             return true;
+        }
+        else if(action.equals("getDate")) {
+            //An example of returning data back to the web layer]
+            final PluginResult result = new PluginResult(PluginResult.Status.OK, (new Date()).toString());
+            callbackContent.sendPluginResult(result);
         }
         return false;
     }
 
-   
+   private void getDate()
+   {
+       if
+   }
 
     private void add(JSONArray args, CallbackContext callback)
     {
